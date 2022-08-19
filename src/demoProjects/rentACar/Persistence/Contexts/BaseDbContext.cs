@@ -29,15 +29,16 @@ namespace Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Brand>(a =>
+            
+            modelBuilder.Entity<Brand>(brand =>
             {
-                a.ToTable("Brands").HasKey(k => k.Id);
-                a.Property(p => p.Id).HasColumnName("Id");
-                a.Property(p => p.Name).HasColumnName("Name");
+                brand.ToTable("Brands").HasKey(k => k.Id);
+                brand.Property(p => p.Id).HasColumnName("Id");
+                brand.Property(p => p.Name).HasColumnName("Name");
             });
 
 
-
+            // After migration it will create test data.
             Brand[] brandEntitySeeds = { new(1, "BMW"), new(2, "Mercedes") };
             modelBuilder.Entity<Brand>().HasData(brandEntitySeeds);
 
